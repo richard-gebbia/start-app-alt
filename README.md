@@ -9,10 +9,10 @@ An opinionated re-work of Elm's start-app.
 
 ## Philosophy changes in start-app-alt
 * The `update` function is *always* `Action -> Model -> Model`, none of this `(Model, Effects)` business. The update function should have one and only one purpose, and that is to change the program's state based on input from the outside world. It should not also encapsulate side-effects.
-* All side effects are relegated to their own functions of type `Signal.Address Context -> Model -> output`.
-    - The `view` function generates `Html`, so its type is `Signal.Address Context -> Model -> Html`.
-    - Similarly, the `request` function generates HTTP Requests of type `Task () something`, so its type is `Signal.Address Context -> Model -> Task () something`
-* There is a type `Output` that is a record of all outputs of a component. There is a function `stepOutput : Signal.Address Context -> Model -> Output` that simply collects each output.
+* All side effects are relegated to their own functions of type `Signal.Address Action -> Model -> output`.
+    - The `view` function generates `Html`, so its type is `Signal.Address Action -> Model -> Html`.
+    - Similarly, the `request` function generates HTTP Requests of type `Task () something`, so its type is `Signal.Address Action -> Model -> Task () something`
+* There is a type `Output` that is a record of all outputs of a component. There is a function `stepOutput : Signal.Address Action -> Model -> Output` that simply collects each output.
 
 Examples 1-4 didn't change from the original. To see this philosophy in action, check out examples 5-7. 
 
